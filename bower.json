@@ -1,0 +1,11 @@
+{
+  "name": "angulartodo",
+  "private": true,
+  "dependencies": {
+    "modernizr": "~2.8.1",
+    "angular": "^1.5.7",
+    "angular-material": "^1.0.9",
+    "angular-resource": "^1.5.7",
+    "icon": "https://fonts.googleapis.com/icon?family=Material+Icons"
+  }
+}

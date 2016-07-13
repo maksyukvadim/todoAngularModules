@@ -1,0 +1,103 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>angularTodo</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- build:css styles/libs.css -->
+    <!-- bower:css -->
+      <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+
+
+    <!-- build:js scripts/plugins.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/app.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controller.js"></script>
+    <script src="scripts/model.js"></script>
+
+    <!-- endbuild -->
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <body ng-app="myApp" ng-controller="todoCtr" ng-click="saveTodoList();" onselectstart="return false">
+    <div class="container">
+
+        <form ng-submit="todoAdd()">
+
+            <md-input-container id="selectLang">
+                <label>Language</label>
+                <md-select ng-model="lang">
+                    <md-option ng-repeat="lang in langs" value="{{lang}}">{{lang}}</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container md-no-float class="md-block">
+                <input type="text" ng-model="todoInput" size="50" placeholder="{{translation.ADD}}" autofocus
+                       id="mainInput" autocomplete="off">
+            </md-input-container>
+            <md-button type="submit" id="btnForSend" type="submit"
+                       name="action">
+                {{translation.SUBMIT}}
+                <md-icon><i class="material-icons ">send</i></md-icon>
+            </md-button>
+            <br>
+            <a href="" ng-click='allCheck()'><i id="checkAll" class="small material-icons mainColor"
+            >mode_edit</i></a>
+        </form>
+
+
+        <br>
+
+        <div ng-repeat="x in todoList | filter:listItem() track by $index ">
+            <md-checkbox ng-model="x.done" id="inp{{ $index+1 }}" class="colorCheckbox">{{ x.todoText }}</md-checkbox>
+                <span class="btnRemove" ng-click="deleted($index)">
+                  <a href="#" class="iconRemoveItem">x</a>
+              </span>
+        </div>
+
+        <div class="footer">
+            <ul>
+                <li><span class="lengthItem">{{todoList.length}}</span> {{translation.ITEMS}}</li>
+                <li ng-class="{colorTab: filter == 'All'}"><a href="" ng-click="filter='All'">{{translation.ALL}}</a>
+                </li>
+                <li ng-class="{colorTab: filter == 'Completed'}"><a href="" ng-click="filter='Completed'">{{translation.COMPLETED}}</a>
+                </li>
+                <li ng-class="{colorTab: filter == 'Active'}"><a href=""
+                                                                 ng-click="filter='Active'">{{translation.ACTIVE}}</a>
+                </li>
+                <li onselectstart="return false;"><a href="" ng-click="removeAll()">{{translation.CLEAR}}</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+
+
+
+  </body>
+</html>
