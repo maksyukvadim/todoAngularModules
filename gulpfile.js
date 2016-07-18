@@ -4,8 +4,10 @@ const gulpLoadPlugins = require('gulp-load-plugins');
 const browserSync = require('browser-sync');
 const del = require('del');
 const wiredep = require('wiredep').stream;
-
+const browserify = require('browserify');
+var babelify = require('babelify');
 const $ = gulpLoadPlugins();
+var source = require('vinyl-source-stream');
 const reload = browserSync.reload;
 
 gulp.task('styles', () => {
@@ -23,11 +25,24 @@ gulp.task('styles', () => {
     .pipe(reload({stream: true}));
 });
 
-gulp.task('scripts', () => {
+
+gulp.task('scripts', function () {
+  return browserify('app/app.js', {debug: true}).transform(babelify.configure({
+    presets: ["es2015"],  plugins: ["ng-annotate"]
+  }))
+    .bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest('.tmp/'))
+});
+
+
+gulp.task('scripts1', () => {
   return gulp.src('app/scripts/**/*.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe($.babel())
+    .pipe($.babel({
+			presets: ['es2015'],  plugins: ["ng-annotate"]
+		}))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe(reload({stream: true}));
@@ -65,7 +80,6 @@ gulp.task('lint:test', () => {
 gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest('dist'));
@@ -108,7 +122,9 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
     server: {
       baseDir: ['.tmp', 'app'],
       routes: {
-        '/bower_components': 'bower_components'
+        '/bower_components': 'bower_components',
+          '/node_modules': 'node_modules',
+          '/app': 'app'
       }
     }
   });
@@ -156,7 +172,7 @@ gulp.task('serve:test', ['scripts'], () => {
 
 
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'copy', 'extras'], () => {
+gulp.task('build', [ 'html', 'images', 'fonts', 'copy', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 

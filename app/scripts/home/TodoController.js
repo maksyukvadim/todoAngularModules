@@ -1,20 +1,22 @@
+
 export default class TodoController {
-  construct($scope, translationService, saveLocalData) {
+  constructor($scope, TranslationService, LocalDataService) {
     this.$scope = $scope;
-    this.translationService = translationService;
-    this.saveLocalData = saveLocalData;
+    this.translationService = TranslationService;
+    this.saveLocalData = LocalDataService;
     this.init();
-  }
-  my() {
-    console.log("My");
+    self = this;
   }
 
+
   init() {
-    console.log("working");
     this.$scope.todoList = JSON.parse(localStorage.getItem('todoListLoc')) || [];
     this.$scope.filter = JSON.parse(localStorage.getItem('filter')) || 'All';
     this.$scope.langs = ['en', 'ru'];
     this.$scope.lang = 'en';
+    this.watchForLang();
+    this.watchForFilter();
+
   }
 
   todoAdd() {
@@ -22,16 +24,21 @@ export default class TodoController {
         this.$scope.todoList.push({todoText: this.$scope.todoInput, done: false});
         this.$scope.todoInput = '';
     }
-    this.$scope.saveTodoList();
+  self.saveTodoList();
   }
-}
+
 
   deleted(x) {
+    console.log(x);
     this.$scope.todoList.splice(x, 1);
+
+
 };
   allCheck() {
+
     var a = 0;
     angular.forEach(this.$scope.todoList, function (x) {
+console.log(x.todoText);
         if (!x.done) {
             x.done = true;
             a++
@@ -45,10 +52,15 @@ export default class TodoController {
 };
 
 removeAll() {
-    let oldList = this.$scope.todoList;
+
+    var oldList = this.$scope.todoList;
+    console.log('oldList');
     this.$scope.todoList = [];
     angular.forEach(oldList, function (x) {
-        if (!x.done) this.$scope.todoList.push(x);
+      console.log(!x.done);
+        if (!x.done){
+          this.$scope.todoList.push(x);
+        }
     });
 };
 
@@ -61,6 +73,7 @@ saveFilter() {
 };
 listItem() {
     return function (items) {
+      console.log('listItem');
         if (this.$scope.filter == 'All') {
             return true;
         } else if (this.$scope.filter == 'Completed') {
@@ -78,9 +91,14 @@ listItem() {
 translate() {
     this.translationService.getTranslation(this.$scope, this.$scope.lang);
 };
-this.$scope.$watch('lang', function () {
-    this.$scope.translate();
-});
-this.$scope.$watch('filter', function () {
-    this.$scope.saveFilter();
-});
+watchForLang() {
+  this.$scope.$watch('lang', function () {
+      self.translate();
+  });
+};
+watchForFilter() {
+  this.$scope.$watch('filter', function () {
+      self.saveFilter();
+  });
+};
+}
