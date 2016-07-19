@@ -15,4 +15,5 @@ export default class TranslationService {
     var allLang = ['en', 'ru'];
     return allLang;
   }
+  
 }

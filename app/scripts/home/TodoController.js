@@ -65,25 +65,10 @@ export default class TodoController {
   setFilter() {
     this.localData.setFilter(this.$scope);
   }
+
   setLang() {
     this.localData.setLang(this.$scope);
   }
-
-  // listItem() {
-  //   return (items) => {
-  //     if (this.$scope.filter == 'All') {
-  //       return true;
-  //     } else if (this.$scope.filter == 'Completed') {
-  //       if (items.done) {
-  //         return items;
-  //       }
-  //     } else {
-  //       if (!items.done) {
-  //         return items;
-  //       }
-  //     }
-  //   };
-  // }
 
   translate() {
     this.translationService.getTranslation(this.$scope, this.$scope.lang);
@@ -92,7 +77,7 @@ export default class TodoController {
   watchForTodoList() {
   this.$scope.$watch('todoList', () => {
       this.setTodoList();
-  });
+  }, true);
   }
 
   watchForLang() {
