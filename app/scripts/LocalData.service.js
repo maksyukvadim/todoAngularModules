@@ -24,9 +24,5 @@ export default class LocalDataService {
   getLang() {
     return JSON.parse(localStorage.getItem('langSite')) || "en";
   }
-
-  getAllLang() {
-    var allLang = ['en', 'ru'];
-    return allLang;
-  }
+  
 }

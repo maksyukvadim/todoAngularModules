@@ -5,16 +5,16 @@ export default class TodoController {
     this.translationService = TranslationService;
     this.localData = LocalDataService;
     this.init();
-    self = this;
   }
 
   init() {
     this.$scope.todoList = this.localData.getTodoList(this.$scope);
     this.$scope.filter = this.localData.getFilter(this.$scope);
     this.$scope.lang = this.localData.getLang(this.$scope);
-    this.$scope.langs = this.localData.getAllLang(this.$scope);
+    this.$scope.langs = this.translationService.getAllLang(this.$scope);
     this.watchForLang();
     this.watchForFilter();
+    this.watchForTodoList();
   }
 
   todoAdd() {
@@ -50,7 +50,6 @@ export default class TodoController {
 
   removeAll() {
     var oldList = this.$scope.todoList;
-    console.log('oldList');
     this.$scope.todoList = [];
     angular.forEach(oldList, (x) => {
       if (!x.done) {
@@ -70,28 +69,30 @@ export default class TodoController {
     this.localData.setLang(this.$scope);
   }
 
-  getData (func) {
-    return this.localData.func(this.$scope);
-  }
-
-  listItem() {
-    return (items) => {
-      if (this.$scope.filter == 'All') {
-        return true;
-      } else if (this.$scope.filter == 'Completed') {
-        if (items.done) {
-          return items;
-        }
-      } else {
-        if (!items.done) {
-          return items;
-        }
-      }
-    };
-  }
+  // listItem() {
+  //   return (items) => {
+  //     if (this.$scope.filter == 'All') {
+  //       return true;
+  //     } else if (this.$scope.filter == 'Completed') {
+  //       if (items.done) {
+  //         return items;
+  //       }
+  //     } else {
+  //       if (!items.done) {
+  //         return items;
+  //       }
+  //     }
+  //   };
+  // }
 
   translate() {
     this.translationService.getTranslation(this.$scope, this.$scope.lang);
+  }
+
+  watchForTodoList() {
+  this.$scope.$watch('todoList', () => {
+      this.setTodoList();
+  });
   }
 
   watchForLang() {

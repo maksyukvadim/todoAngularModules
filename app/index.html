@@ -22,9 +22,9 @@
     <script src="app.js"></script>
     <!-- endbuild -->
   </head>
-  <body ui-view>
+
     <!--[if lt IE 10]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
-    <body ng-click="vm.saveTodoList();" onselectstart="return false" ng-controller="TodoController as vm">
+    <body ui-view ng-click="vm.saveTodoList();" onselectstart="return false" ng-controller="TodoController as vm">
       <div class="container">
 
         <form ng-submit="vm.todoAdd()">
@@ -51,8 +51,8 @@
           </a>
         </form>
         <br>
-        <div ng-repeat="x in todoList | filter:vm.listItem() track by $index ">
-          <md-checkbox ng-model="x.done" name="x" id="inp{{ $index+1 }}" class="colorCheckbox">{{ x.todoText }}</md-checkbox>
+        <div ng-repeat="x in todoList | filterListItem track by $index ">
+          <md-checkbox   ng-model="x.done" name="x" id="inp{{ $index+1 }}" class="colorCheckbox">{{ x.todoText }}</md-checkbox>
           <span class="btnRemove" ng-click="vm.deleted($index)">
             <a href="#" class="iconRemoveItem">x</a>
           </span>
