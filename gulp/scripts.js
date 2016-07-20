@@ -12,5 +12,5 @@ gulp.task('scripts', function () {
   }))
     .bundle()
     .pipe(source('app.js'))
-    .pipe(gulp.dest(config.tmp))
+    .pipe(gulp.dest(config.scripts.tmp))
 });
