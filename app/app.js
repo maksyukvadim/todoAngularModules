@@ -1,9 +1,11 @@
 import angular from 'angular';
-
 import 'angular-material';
-import uiRouter from 'angular-ui-router';
-import { routerConfig } from './app.router';
+import TranslationService from './scripts/Translation.service';
+import LocalDataService from './scripts/LocalData.service';
 import './scripts/home/home.module';
- angular.module('myApp', [uiRouter, 'ngMaterial', 'app.home'])
-   .config(routerConfig)
+
+angular.module('myApp', ['ngMaterial', 'app.home'])
+.service('TranslationService', TranslationService)
+.service('LocalDataService', LocalDataService)
+
 ;

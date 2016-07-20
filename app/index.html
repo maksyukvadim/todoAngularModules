@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" ng-app="myApp" >
+<html class="no-js" ng-app="myApp">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- build:css styles/libs.css -->
     <!-- bower:css -->
-      <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
+    <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -22,10 +22,64 @@
     <script src="app.js"></script>
     <!-- endbuild -->
   </head>
-  <body ui-view>
-    <!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
-  </body>
-</html>
+    <!--[if lt IE 10]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
+    <body ui-view onselectstart="return false" ng-controller="TodoController as vm">
+      <div class="container">
+
+        <form ng-submit="vm.todoAdd()">
+
+          <md-input-container id="selectLang">
+            <label>Language</label>
+            <md-select ng-model="lang">
+              <md-option ng-repeat="lang in langs" value="{{lang}}">{{lang}}</md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container md-no-float class="md-block">
+            <input type="text" ng-model="todoInput" size="50" placeholder="{{translation.ADD}}" autofocus id="mainInput" autocomplete="off">
+          </md-input-container>
+          <md-button type="submit" id="btnForSend" type="submit" name="action">
+            {{translation.SUBMIT}}
+            <md-icon>
+              <i class="material-icons ">send</i>
+            </md-icon>
+          </md-button>
+          <br>
+          <a href="" ng-click='vm.allCheck()'>
+            <i id="checkAll" class="small material-icons mainColor">mode_edit</i>
+          </a>
+        </form>
+        <br>
+        <div ng-repeat="x in todoList | filterListItem track by $index ">
+          <md-checkbox ng-model="x.done" name="x" id="inp{{ $index+1 }}" class="colorCheckbox">{{ x.todoText }}</md-checkbox>
+          <span class="btnRemove" ng-click="vm.deleted($index)">
+            <a href="#" class="iconRemoveItem">x</a>
+          </span>
+        </div>
+
+        <div class="footer">
+          <ul>
+            <li>
+              <span class="lengthItem">{{todoList.length}}</span>
+              {{translation.ITEMS}}</li>
+            <li ng-class="{colorTab: filter == 'All'}">
+              <a href="" ng-click="filter='All'">{{translation.ALL}}</a>
+            </li>
+            <li ng-class="{colorTab: filter == 'Completed'}">
+              <a href="" ng-click="filter='Completed'">{{translation.COMPLETED}}</a>
+            </li>
+            <li ng-class="{colorTab: filter == 'Active'}">
+              <a href="" ng-click="filter='Active'">{{translation.ACTIVE}}</a>
+            </li>
+            <li onselectstart="return false;">
+              <a href="" ng-click="vm.removeAll()">{{translation.CLEAR}}</a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+
+    </body>
+  </html>
