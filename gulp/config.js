@@ -15,25 +15,21 @@ module.exports = {
           dest: `./${dest}/lang_json/`,
       },
       fonts: {
-          src: `${app}/fonts/**/*`,
+          all: `${app}/fonts/**/*`,
           tmp: `${tmp}/fonts`,
           dest: `${dest}/fonts`,
-          watch: `${tmp}/fonts/**/*`,
       },
       html: {
-          src: `${app}/*.html`,
-          dest: `${dest}/js/`,
-          watch: `${app}/*.html`,
+          all: `${app}/*.html`,
       },
       images: {
-          src: `${app}/images/**/*`,
+          all: `${app}/images/**/*`,
           dest: `${dest}/images`,
-          watch: `${app}/images/**/*`,
       },
       styles: {
           src: `${app}/styles/*.scss`,
           tmp: `${tmp}/styles`,
-          watch: `${app}/styles/**/*.scss`,
+          all: `${app}/styles/**/*.scss`,
       },
     },
 };

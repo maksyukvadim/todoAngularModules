@@ -4,7 +4,7 @@ const $ = gulpLoadPlugins();
 const config = require('./config').path;
 
 gulp.task('images', () => {
-  return gulp.src(config.images.src)
+  return gulp.src(config.images.all)
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true,
