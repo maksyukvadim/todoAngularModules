@@ -10,7 +10,7 @@ module.exports = {
           tmp: `${tmp}/`,
           watch: `${app}/**/*.js`,
       },
-      json: {
+      dataLang: {
           src: `${app}/lang_json/*.json`,
           dest: `./${dest}/lang_json/`,
       },
