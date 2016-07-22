@@ -3,8 +3,8 @@ import 'angular-material';
 import uiRouter from 'angular-ui-router';
 
 import './modules/home/home.module';
-import './modules/LocalDataService/LocalDataModule'
-import './modules/TranslationService/TranslationModule'
+import './modules/LocalDataService/LocalData.module'
+import './modules/TranslationService/Translation.module'
 
 import {routerConfig} from './app.router';
 
