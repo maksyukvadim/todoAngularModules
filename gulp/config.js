@@ -31,5 +31,8 @@ module.exports = {
           tmp: `${tmp}/styles`,
           all: `${app}/styles/**/*.scss`,
       },
+      build: {
+        all: `${dest}/**/*`,
+      },
     },
 };
