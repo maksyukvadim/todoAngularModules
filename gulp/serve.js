@@ -28,5 +28,4 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
   gulp.watch(config.styles.all, ['styles']);
   gulp.watch(config.scripts.watch, ['scripts']);
   gulp.watch(config.fonts.all, ['fonts']);
-  gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
