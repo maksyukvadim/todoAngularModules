@@ -2,6 +2,6 @@ const gulp = require('gulp');
 const config = require('./config').path;
 
 gulp.task('copyView', function() {
-     gulp.src([config.html.all])
-         .pipe(gulp.dest(config.html.dest))
+     gulp.src([config.html.default.all])
+         .pipe(gulp.dest(config.html.default.dest))
  });

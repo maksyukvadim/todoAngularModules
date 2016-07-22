@@ -18,8 +18,13 @@ module.exports = {
           dest: `${dest}/fonts`,
       },
       html: {
-          all: `${app}/**/*.html`,
-          dest: `${dest}/`,
+        index: {
+            src: `${app}/index.html`,
+            dest: `${dest}/`,
+        }, default: {
+            all: `${app}/modules/**/*.html`,
+            dest: `${dest}/views`,
+        }
       },
       images: {
           all: `${app}/images/**/*`,

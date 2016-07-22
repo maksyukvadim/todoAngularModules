@@ -5,7 +5,7 @@ const $ = gulpLoadPlugins();
 const config = require('./config').path;
 const reload = browserSync.reload;
 
-gulp.task('serve', ['styles', 'scripts', 'fonts', 'copyView'], () => {
+gulp.task('serve', ['styles', 'scripts', 'fonts', 'copyView', 'copyIndex'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -20,7 +20,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts', 'copyView'], () => {
   });
 
   gulp.watch([
-    config.html.all,
+    config.html.default.all,
     config.images.all,
     config.fonts.all
   ]).on('change', reload);
