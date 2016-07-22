@@ -6,7 +6,7 @@ const reload = browserSync.reload;
 const config = require('./config').path;
 
 gulp.task('styles', () => {
-  return gulp.src(config.styles.src)
+  return gulp.src(config.styles.all)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass.sync({

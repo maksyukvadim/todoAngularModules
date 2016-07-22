@@ -10,7 +10,7 @@ module.exports = {
           tmp: `${tmp}/`,
           watch: `${app}/**/*.js`,
       },
-      dataLang: {
+      DataLang: {
           src: `${app}/lang_json/*.json`,
           dest: `./${dest}/lang_json/`,
       },
@@ -27,9 +27,8 @@ module.exports = {
           dest: `${dest}/images`,
       },
       styles: {
-          src: `${app}/styles/*.scss`,
-          tmp: `${tmp}/styles`,
           all: `${app}/styles/**/*.scss`,
+          tmp: `${tmp}/styles`,
       },
       build: {
         all: `${dest}/**/*`,
