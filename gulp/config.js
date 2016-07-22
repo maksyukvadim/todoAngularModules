@@ -1,13 +1,12 @@
 const dest = 'dist';
 const app = 'app';
-const tmp = '.tmp';
+
 
 module.exports = {
     path: {
       scripts: {
           src: `${app}/app.js`,
-          dest: `${dest}/js/`,
-          tmp: `${tmp}/`,
+          dest: `${dest}/`,
           watch: `${app}/**/*.js`,
       },
       DataLang: {
@@ -16,11 +15,11 @@ module.exports = {
       },
       fonts: {
           all: `${app}/fonts/**/*`,
-          tmp: `${tmp}/fonts`,
           dest: `${dest}/fonts`,
       },
       html: {
-          all: `${app}/*.html`,
+          all: `${app}/**/*.html`,
+          dest: `${dest}/`,
       },
       images: {
           all: `${app}/images/**/*`,
@@ -28,7 +27,7 @@ module.exports = {
       },
       styles: {
           all: `${app}/styles/**/*.scss`,
-          tmp: `${tmp}/styles`,
+          dest: `${dest}/styles`,
       },
       build: {
         all: `${dest}/**/*`,

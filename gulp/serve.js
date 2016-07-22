@@ -5,12 +5,12 @@ const $ = gulpLoadPlugins();
 const config = require('./config').path;
 const reload = browserSync.reload;
 
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['styles', 'scripts', 'fonts', 'copyView'], () => {
   browserSync({
     notify: false,
     port: 9000,
     server: {
-      baseDir: ['.tmp', 'app'],
+      baseDir: ['dist'],
       routes: {
         '/bower_components': 'bower_components',
           '/node_modules': 'node_modules',
