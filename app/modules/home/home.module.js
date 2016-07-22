@@ -1,6 +1,6 @@
 import 'angular-resource';
 
-import TodoController from './TodoController';
+import TodoController from './home.controller';
 import filterListItem from './todoItem.filter';
 
 angular.module('app.home', ['ngResource'])
