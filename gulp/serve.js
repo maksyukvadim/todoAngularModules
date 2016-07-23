@@ -21,8 +21,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts', 'copyView', 'copyIndex'], () =
 
   gulp.watch([
     config.html.default.all,
-    config.images.all,
-    config.fonts.all
+    config.images.all
   ]).on('change', reload);
 
   gulp.watch(config.styles.all, ['styles']);
