@@ -59,15 +59,15 @@ export default class TodoController {
   };
 
   setTodoList() {
-    this.localData.setTodoList(this.$scope);
+    this.localData.todoListLocal = this.$scope;
   }
 
   setFilter() {
-    this.localData.setFilter(this.$scope);
+    this.localData.filter = this.$scope;
   }
 
   setLang() {
-    this.localData.setLang(this.$scope);
+    this.localData.lang = this.$scope;
   }
 
   translate() {
