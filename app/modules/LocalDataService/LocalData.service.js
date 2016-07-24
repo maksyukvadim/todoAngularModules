@@ -1,28 +1,30 @@
 export default class LocalDataService {
-  setTodoList($scope) {
-    var setList = JSON.stringify($scope.todoList);
-    localStorage.setItem('todoListLoc', setList);
+
+  set todoListLocal($scope) {
+      var setList = JSON.stringify($scope.todoList);
+      localStorage.setItem('todoListLoc', setList);
   }
 
-  setFilter($scope) {
-    var setFilter = JSON.stringify($scope.filter);
-    localStorage.setItem('filter', setFilter);
-  }
-  setLang($scope) {
-    var setLang = JSON.stringify($scope.lang);
-    localStorage.setItem('langSite', setLang);
+  get todoListLocal() {
+      return JSON.parse(localStorage.getItem('todoListLoc')) || [];
   }
 
-  getTodoList() {
-    return JSON.parse(localStorage.getItem('todoListLoc')) || [];
+  set filter($scope) {
+      var setFilter = JSON.stringify($scope.filter);
+      localStorage.setItem('filter', setFilter);
   }
 
-  getFilter() {
-    return JSON.parse(localStorage.getItem('filter')) || "All";
+  get filter() {
+      return JSON.parse(localStorage.getItem('filter')) || "All";
   }
 
-  getLang() {
-    return JSON.parse(localStorage.getItem('langSite')) || "en";
+  set lang($scope) {
+      var setLang = JSON.stringify($scope.lang);
+      localStorage.setItem('langSite', setLang);
   }
   
+  get lang() {
+      return JSON.parse(localStorage.getItem('langSite')) || "en";
+  }
+
 }
