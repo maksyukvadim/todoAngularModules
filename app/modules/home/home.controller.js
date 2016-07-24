@@ -3,15 +3,15 @@ export default class TodoController {
   constructor($scope, TranslationService, LocalDataService) {
     this.$scope = $scope;
     this.translationService = TranslationService;
-    this.localData = LocalDataService;
+    this.localData = LocalDataService;  
     this.init();
   }
 
   init() {
-    this.$scope.todoList = this.localData.getTodoList(this.$scope);
-    this.$scope.filter = this.localData.getFilter(this.$scope);
-    this.$scope.lang = this.localData.getLang(this.$scope);
-    this.$scope.langs = this.translationService.getAllLang(this.$scope);
+    this.$scope.todoList = this.localData.todoListLocal;
+    this.$scope.filter = this.localData.filter;
+    this.$scope.lang = this.localData.lang;
+    this.$scope.langs = this.translationService.getAllLang();
     this.watchForLang();
     this.watchForFilter();
     this.watchForTodoList();

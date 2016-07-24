@@ -1,7 +1,7 @@
 
 export default function filterListItem(LocalDataService) {
    return (items) => {
-     var filter = LocalDataService.getFilter();
+     var filter = LocalDataService.filter;
      var list = [];
      if (filter == 'All') {
        return items;
